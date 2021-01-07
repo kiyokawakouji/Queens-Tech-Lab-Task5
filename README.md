@@ -1,6 +1,6 @@
 # flutter_queens_tech_lab_task5
 
-A new Flutter application.
+CONNPASSのAPIを活用し、イベントの検索結果をListViewで表示させるアプリ。
 
 ## Getting Started
 
