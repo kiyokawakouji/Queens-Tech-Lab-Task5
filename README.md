@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # flutter_queens_tech_lab_task5
 
 CONNPASSのAPIを活用し、イベントの検索結果をListViewで表示させるアプリ。
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Queens-Tech-Lab-Task5
+>>>>>>> origin/main
