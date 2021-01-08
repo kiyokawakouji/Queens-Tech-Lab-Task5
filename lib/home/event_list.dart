@@ -6,3 +6,5 @@
 イベント詳細情報表示
 
  */
+
+import 'package:pedantic_mono/pedantic_mono.dart';
