@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home/body.dart';
-import 'package:pedantic_mono/pedantic_mono.dart';
+import 'package:flutter_queens_tech_lab_task5/view/body.dart';
+import 'package:flutter_queens_tech_lab_task5/view/event_list.dart';
+import 'package:freezed/builder.dart';
 
 
 void main() {
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'connpass event search app'),
+      initialRoute: '/',
+      routes: {
+         '/': (context) => EventList(),
+        '/body': (context) => MyApp(),
+      },
     );
   }
 }
