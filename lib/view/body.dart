@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 void _submission(BuildContext context) {
   if (_formKey.currentState.validate()) {
     _formKey.currentState.save();
-    // 実行したプロセスを画面下部に表示する
+    // ReisedButtonの実行プロセスを画面下部に表示する
     Scaffold
         .of(context)
         .showSnackBar(const SnackBar(content: Text('Processing Data')));
