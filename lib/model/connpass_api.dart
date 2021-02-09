@@ -1,7 +1,7 @@
  // APIコール部分 json.decode
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_queens_tech_lab_task5/model/event_repository.dart';
+import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
 // import 'package:flutter_queens_tech_lab_task5/view/body.dart';
 
  Future<List<ConnpassRepository>> getEvents(String searchWord) async {

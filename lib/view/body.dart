@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_queens_tech_lab_task5/view/body.dart';
-import 'package:flutter_queens_tech_lab_task5/model/connpass_api.dart';
-import 'package:flutter_queens_tech_lab_task5/model/connpass_repository.dart';
-import 'package:flutter_queens_tech_lab_task5/model/event_repository.dart';
+import 'package:flutter_queens_tech_lab_task5/model/api.dart';
+import 'package:flutter_queens_tech_lab_task5/model/connpass_response.dart';
+import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
@@ -109,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+ // ブラウザで開く
 _launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
