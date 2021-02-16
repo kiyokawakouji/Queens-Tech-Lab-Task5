@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter_queens_tech_lab_task5/view/body.dart';
-import 'package:flutter_queens_tech_lab_task5/model/connpass_api.dart';
+import 'package:flutter_queens_tech_lab_task5/view/view_model_data.dart';
+import 'package:flutter_queens_tech_lab_task5/view/view_model.dart';
 import 'package:flutter_queens_tech_lab_task5/model/connpass_response.dart';
 import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -20,8 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StateNotifierProvider<MainViewModel, MainViewModelData>(
-        create: (_) => MainViewModel(),
+      home: StateNotifierProvider<ViewModel, ViewModelData>(
+        create: (_) => ViewModel(),
         child: const MyHomePage(title: 'Connpass Event Search App'),
       ),
     );

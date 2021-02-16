@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_queens_tech_lab_task5/view/body.dart';
-import 'package:flutter_queens_tech_lab_task5/model/api.dart';
 import 'package:flutter_queens_tech_lab_task5/model/connpass_response.dart';
 import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
+import 'package:flutter_queens_tech_lab_task5/view/view_model.dart';
+import 'package:flutter_queens_tech_lab_task5/view/view_model_data.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import 'detail.dart';
 
+ // ListView表示部分
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -25,6 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final maxScrollExtent = _scrollController.position.maxScrollExtent;
       final currentPosition = _scrollController.position.pixels;
       if (maxScrollExtent > 0 && (maxScrollExtent - 20.0) <= currentPosition) {
+        // ignore: flutter_style_todos
         // TODO pagination
       }
     });
@@ -33,11 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final response = context.select<MainViewModelData, ConnpassResponse>((data) => data.response);
-    final state = context.select<MainViewModelData, MainViewModelState>((data) => data.viewModelState);
-    // ignore: lines_longer_than_80_chars
-    final List<ConnpassResponse> eventList = response != null ? response.items : [];
+    // StateNotifierのStateを読む
+    // context.select<Data,T>でデータを読み出す。　selectはデータに変化があった際に自動でrebuildしてくれる
+    final response = context.select<ViewModelData, ConnpassResponse>((data) => data.response);
+    final state = context.select<ViewModelData, ViewModelState>((data) => data.viewModelState);
+    final List<ConnpassResponse> eventList = response != null ? response.events : [];
 
+    // ListViewでJSONデータを表示
     var body = eventList.isNotEmpty ?
       ListView(
         scrollDirection: Axis.vertical,
@@ -45,17 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: eventList
             .map((event) => Card(
             child: ListTile(
-              title: Text(
-                event.volumeInfo.title,
-              ),
+              title: Text(event.title),
               subtitle: Text(
-                event.volumeInfo.description != null
-                    ? event.volumeInfo.description
-                    : '',
+                thumbnailSection(),
+                detailSection(),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-              onTap: () => _launchURL(event.volumeInfo.infoLink),
+              onTap: () => _launchURL(event),
             )))
             .toList())
         : const Center(
@@ -69,9 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    if (state == MainViewModelState.loading) {
+    if (state == ViewModelState.loading) {
       body = const Center(child: CircularProgressIndicator(),);
-    } else if (state == MainViewModelState.error) {
+    } else if (state == ViewModelState.error) {
       body = const Center(
         child: Padding(
           padding: EdgeInsets.all(24),
@@ -79,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('エラーが発生しました。検索ワードを変えてお試しください', style: TextStyle(fontSize: 19), textAlign: TextAlign.center,),
         ),);
     }
-
+ // AppBar 検索バー
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -100,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: <Widget>[
           IconButton(icon: const Icon(Icons.search), onPressed:() {
-            context.read<MainViewModel>().fetch(_searchQuery.text);
+            context.read<ViewModel>().fetch(_searchQuery.text);
           })
         ],
       ),
@@ -111,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
  // ブラウザで開く
 _launchURL(String url) async {
+  const url = 'https://connpass.com/api/v1/event/';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

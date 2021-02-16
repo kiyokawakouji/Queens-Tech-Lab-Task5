@@ -1,17 +1,18 @@
 import 'package:state_notifier/state_notifier.dart';
-import 'package:state_notifier_test/model/GoogleBooksAPIService.dart';
-import 'package:state_notifier_test/view/MainViewModelData.dart';
+import 'package:flutter_queens_tech_lab_task5/model/connpass_api.dart';
+import 'package:flutter_queens_tech_lab_task5/view/view_model_data.dart';
 
-class MainViewModel extends StateNotifier<MainViewModelData> {
-  MainViewModel(): super(MainViewModelData());
+ // StateNotifierの実装
+class ViewModel extends StateNotifier<ViewModelData> {
+  ViewModel(): super(const ViewModelData());
 
   void fetch(String keyword) {
-    state = state.copyWith(viewModelState: MainViewModelState.loading);
-    getBooks(keyword)
+    state = state.copyWith(viewModelState: ViewModelState.loading);
+    getEvents(keyword)
         .then((res) {
-      state = state.copyWith(response: res, viewModelState: MainViewModelState.normal);
+      state = state.copyWith(response: res, viewModelState: ViewModelState.normal);
     }).catchError((_) {
-      state = state.copyWith(response: null, viewModelState: MainViewModelState.error);
+      state = state.copyWith(response: null, viewModelState: ViewModelState.error);
     });
   }
 }

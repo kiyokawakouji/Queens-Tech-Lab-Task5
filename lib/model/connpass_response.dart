@@ -1,13 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
+
+part 'connpass_response.freezed.dart';
+part 'connpass_response.g.dart';
 
 @freezed
 abstract class ConnpassResponse with _$ConnpassResponse {
   const factory ConnpassResponse({
-    String kind,
-    int totalItems,
-    List<ConnpassResponse> items
+    final int resultsReturned,
+    final int resultsAvailable,
+    final int resultsStart,
+    List<ConnpassResponse> events
   }) = _ConnpassResponse;
 
   factory ConnpassResponse.fromJson(Map<String, dynamic> json) => _$ConnpassResponseFromJson(json);

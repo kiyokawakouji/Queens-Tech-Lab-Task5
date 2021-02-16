@@ -1,9 +1,8 @@
- // APIコール部分 json.decode
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_queens_tech_lab_task5/model/event_response.dart';
-// import 'package:flutter_queens_tech_lab_task5/view/body.dart';
+import 'package:flutter_queens_tech_lab_task5/model/connpass_response.dart';
 
+// APIコール部分 json.decode
  Future<List<ConnpassRepository>> getEvents(String searchWord) async {
    final response = await http.get('https://connpass.com/api/v1/event/?count=100&order=1&keyword=$searchWord');
    if (response.statusCode == 200) {

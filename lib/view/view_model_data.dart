@@ -1,14 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_notifier_test/model/GoogleBooksResponse.dart';
+import 'package:flutter_queens_tech_lab_task5/model/connpass_response.dart';
 
-part 'MainViewModelData.freezed.dart';
+part 'view_model_data.freezed.dart';
 
-enum MainViewModelState { normal, loading, error }
+ // StateNotifierが管理するState
+ // View側で使うレスポンス、状態を通知するEnumを定義。
+enum ViewModelState { normal, loading, error }
 
 @freezed
-abstract class MainViewModelData with _$MainViewModelData {
-  const factory MainViewModelData({
-    GoogleBooksResponse response,
-    MainViewModelState viewModelState
-  }) = _MainViewModelData;
+abstract class ViewModelData with _$ViewModelData {
+  const factory ViewModelData({
+    ConnpassResponse response,
+    ViewModelState viewModelState
+  }) = _ViewModelData;
 }
